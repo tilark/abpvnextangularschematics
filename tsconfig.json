@@ -2,6 +2,12 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "abpvnextangularschema": [
+        "dist/abpvnextangularschema/abpvnextangularschema",
+        "dist/abpvnextangularschema"
+      ]
+    },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
