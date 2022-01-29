@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -44,7 +47,7 @@
           "strict": true
         }
       },
-      "root": "projects/libtest",
+      "root": "projects/libtest/src",
       "sourceRoot": "projects/libtest/src",
       "prefix": "app",
       "architect": {

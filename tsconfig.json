@@ -4,7 +4,6 @@
   "compilerOptions": {
     "paths": {
       "abpvnextangularschema": [
-        "dist/abpvnextangularschema/abpvnextangularschema",
         "dist/abpvnextangularschema"
       ]
     },
