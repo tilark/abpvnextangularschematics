@@ -1,0 +1,107 @@
+import { Injectable } from '@angular/core';
+import { PagedResultDto } from '@abp/ng.core';
+import { <%= classify(dto) %>Service } from '@proxy/<%= dasherize(dto) %>';
+import { <%= classify(dto) %>Create,
+  <%= classify(dto) %>DeviceCreate,
+  <%= classify(dto) %>DeviceDto,
+  <%= classify(dto) %>Dto,
+  <%= classify(dto) %>EditDto,
+  <%= classify(dto) %>Search,
+  <%= classify(dto) %>Service,
+  <%= classify(dto) %>UpdateDeviceTag} from '@proxy/<%= dasherize(dto) %>';
+import { Observable, Subject } from 'rxjs';
+import { map, first } from 'rxjs/operators';
+@Injectable({
+  providedIn: 'root'
+})
+export class <%= classify(name) %>Service {
+  private searchCondition = { } as <%= classify(dto) %>Search;
+  searchCondition$ = new Subject<<%= classify(dto) %>Search>();
+  private list = {} as PagedResultDto<<%= classify(dto) %>Dto>;
+  list$ = new Subject<PagedResultDto<<%= classify(dto) %>Dto>>();
+  private pageIndex = 1;
+  private pageSize = 10;
+  pageIndex$ = new Subject<number>();
+  pageSize$ = new Subject<number>();
+  editFormId = '';
+  editFormId$ = new Subject<string>();
+
+  private createItem = {} as <%= classify(dto) %>Create;
+  createItem$ = new Subject<<%= classify(dto) %>Create>();
+
+  private editItem = {} as <%= classify(dto) %>Dto;
+  editItem$ = new Subject<<%= classify(dto) %>Dto>();
+
+  private isLoadingButton = false;
+  isLoadingButton$ = new Subject<boolean>();
+
+  constructor(
+    private <%= camelize(dto) %>Service: <%= classify(dto) %>Service,
+  ) { }
+
+  private broadCast() {
+    this.isLoadingButton$.next(this.isLoadingButton);
+    this.searchCondition$.next(this.searchCondition);
+    this.list$.next(this.list);
+    this.editFormId$.next(this.editFormId);
+    this.editItem$.next(this.editItem);
+    this.pageIndex$.next(this.pageIndex);
+    this.pageSize$.next(this.pageSize);
+  }
+  public getAll() {
+    this.broadCast();
+  }
+  search(input: <%= classify(dto) %>Search) {
+    this.setLoadingButton(true);
+    this.searchCondition = input;
+    this.searchCondition$.next(this.searchCondition);
+    this.<%= camelize(dto) %>Service.getList(input)
+      .subscribe(
+        a => { this.list = a; this.list$.next(a); },
+        () => {},
+        () => this.setLoadingButton(false)
+        );
+  }
+  searchConditionChange(pageIndex: number, pageSize: number) {
+    this.searchCondition.skipCount = pageSize * (pageIndex - 1);
+    this.searchCondition.maxResultCount = pageSize;
+    this.pageIndex$.next(pageIndex);
+    this.pageSize$.next(pageSize);
+    this.search(this.searchCondition);
+  }
+  searchOrigin(input: <%= classify(dto) %>Search, pageIndex = 1, pageSize = 10) {
+    this.searchCondition = input;
+    this.searchConditionChange(pageIndex, pageSize);
+  }
+  fresh() {
+    this.search(this.searchCondition);
+  }
+
+  setEditItem(item: <%= classify(dto) %>Dto) {
+    this.editItem = item;
+    this.editItem$.next(item);
+  }
+
+  create(item: <%= classify(dto) %>Create): Observable<string> {
+    this.setLoadingButton(true);
+    return this.<%= camelize(dto) %>Service.create(item)
+      .pipe(map(
+      (a) => {
+        this.editFormId = a.id;
+        return a.id;
+      }
+      ));
+  }
+
+  update(id: string, itemEdit: <%= classify(dto) %>EditDto): Observable<string> {
+    return this.<%= camelize(dto) %>Service.update(id, itemEdit)
+     .pipe(
+        map(a => a.id)
+      );
+  }
+
+  public setLoadingButton(value: boolean) {
+    this.isLoadingButton = value;
+    this.isLoadingButton$.next(this.isLoadingButton);
+  }
+}

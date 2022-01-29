@@ -4,7 +4,7 @@ import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 // Just return the tree
 export function ngAdd(): Rule {
   return (tree: Tree, context: SchematicContext) => {
-    console.log('enter abpvnextangularschema ngAdd()');
+    console.log('enter tilarkschema ngAdd()');
     context.addTask(new NodePackageInstallTask());
     return tree;
   };

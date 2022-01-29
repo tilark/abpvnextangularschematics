@@ -1,9 +1,9 @@
 {
-  "name": "abpvnextangularschema",
+  "name": "tilarkschema",
   "version": "0.0.1",
   "scripts": {
     "build": "tsc -p tsconfig.schematics.json",
-    "postbuild": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/abpvnextangularschema/"
+    "postbuild": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/tilarkschema/"
   },
   "peerDependencies": {
     "@angular/common": "^13.1.0",

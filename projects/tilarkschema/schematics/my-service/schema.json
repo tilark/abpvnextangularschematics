@@ -28,6 +28,13 @@
         "$source": "projectName"
       }
     },
+    "dto": {
+      "type": "string",
+      "description": "The name of the entity.",
+      "$default": {
+        "$source": "entity"
+      }
+    },
     "flat": {
       "type": "boolean",
       "default": true,
@@ -40,5 +47,5 @@
       "x-user-analytics": 12
     }
   },
-  "required": ["name"]
+  "required": ["name", "dto"]
 }

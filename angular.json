@@ -6,23 +6,23 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "abpvnextangularschema": {
+    "tilarkschema": {
       "projectType": "library",
-      "root": "projects/abpvnextangularschema",
-      "sourceRoot": "projects/abpvnextangularschema/src",
+      "root": "projects/tilarkschema",
+      "sourceRoot": "projects/tilarkschema/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/abpvnextangularschema/ng-package.json"
+            "project": "projects/tilarkschema/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/abpvnextangularschema/tsconfig.lib.prod.json"
+              "tsConfig": "projects/tilarkschema/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/abpvnextangularschema/tsconfig.lib.json"
+              "tsConfig": "projects/tilarkschema/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -30,9 +30,9 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/abpvnextangularschema/src/test.ts",
-            "tsConfig": "projects/abpvnextangularschema/tsconfig.spec.json",
-            "karmaConfig": "projects/abpvnextangularschema/karma.conf.js"
+            "main": "projects/tilarkschema/src/test.ts",
+            "tsConfig": "projects/tilarkschema/tsconfig.spec.json",
+            "karmaConfig": "projects/tilarkschema/karma.conf.js"
           }
         }
       }
@@ -141,5 +141,5 @@
       }
     }
   },
-  "defaultProject": "abpvnextangularschema"
+  "defaultProject": "tilarkschema"
 }
